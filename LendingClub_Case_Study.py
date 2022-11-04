@@ -111,3 +111,25 @@ print(loan_ip_clean2["emp_length"])
 loan_ip_clean2.info()
 
 ################################
+################################
+# Basic statistics with .describe() - Quantitative Variables
+loan_ip_clean2['loan_amnt'].describe()
+
+sns.boxplot(loan_ip_clean2.loan_amnt)
+ # Basic statistics with .describe() -Quantitative Variables
+
+print('Before Removal of Outliers :\n')
+print(loan_ip_clean2['annual_inc'].describe())
+
+# Data cleaning
+# Remove Outliers quantile .99 from Annual Income
+# it will make it easier to visualize the plots.
+
+loan_ip_clean2_plot = loan_ip_clean2[loan_ip_clean["annual_inc"] < loan_ip_clean2["annual_inc"].quantile(0.99)]
+
+print('After Removal of Outliers :')
+print(loan_ip_clean2_plot["annual_inc"].describe())
+
+# Now below data looks much better. Lets plot later and find some conclusions
+#box plot on the annual inc variable
+sns.boxplot(loan_ip_clean2_plot.annual_inc)
